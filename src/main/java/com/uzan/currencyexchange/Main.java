@@ -1,4 +1,5 @@
 import com.uzan.currencyexchange.service.AuthService;
+import com.uzan.currencyexchange.service.CurrencyService;
 import java.util.Scanner;
 
 public class Main {
@@ -15,5 +16,7 @@ public class Main {
         String password = scanner.nextLine();
 
         authService.authenticate(username, password);
+        CurrencyService currencyService = new CurrencyService();
+        currencyService.displayAllCurrencies();
     }
 }
