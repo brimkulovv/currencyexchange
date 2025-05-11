@@ -9,10 +9,10 @@ public class AuthService {
     public boolean authenticate(String username, String password) {
         User user = userDAO.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
-            System.out.println("✅ Вход выполнен успешно!");
+            System.out.println("Успешный вход");
             return true;
         }
-        System.out.println("❌ Неверный логин или пароль.");
+        System.out.println("Неверное имя пользователя или пароль");
         return false;
     }
 }

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Operation {
     private int id;
     private int currencyId;
-    private String type; // BUY, SELL, TOPUP
+    private String type;
     private double amount;
     private LocalDateTime date;
     private double profit;
@@ -21,7 +21,6 @@ public class Operation {
         this.profit = profit;
     }
 
-    // Getters и Setters...
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

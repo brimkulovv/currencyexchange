@@ -4,16 +4,11 @@ import com.uzan.currencyexchange.db.DatabaseManager;
 import com.uzan.currencyexchange.model.Currency;
 import com.uzan.currencyexchange.model.Euro;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CurrencyDAO {
-
     public List<Currency> getAllCurrencies() {
         List<Currency> currencies = new ArrayList<>();
         String sql = "SELECT * FROM currencies";

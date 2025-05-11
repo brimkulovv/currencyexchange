@@ -22,13 +22,13 @@ public class OperationService {
                 op.setCurrencyId(c.getId());
                 op.setType("BUY");
                 op.setAmount(amount);
-                op.setProfit(0); // пока упрощённо
+                op.setProfit(0);
 
                 operationDAO.addOperation(op);
-                System.out.println("✅ Покупка завершена.");
+                System.out.println("Покупка завершена");
                 return;
             }
         }
-        System.out.println("❌ Валюта не найдена.");
+        System.out.println("Валюта не найдена");
     }
 }

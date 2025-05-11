@@ -8,52 +8,51 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("🚀 Запуск приложения Currency Exchange...");
+        System.out.println("Запуск Currency Exchange...");
 
         AuthService authService = new AuthService();
         CurrencyService currencyService = new CurrencyService();
         OperationService operationService = new OperationService();
         Scanner scanner = new Scanner(System.in);
 
-        // Авторизация
-        System.out.print("Введите логин: ");
+        System.out.print("Имя пользователя: ");
         String username = scanner.nextLine();
 
-        System.out.print("Введите пароль: ");
+        System.out.print("Пароль: ");
         String password = scanner.nextLine();
 
         if (!authService.authenticate(username, password)) {
-            System.out.println("Завершение программы.");
+            System.out.println("Программа завершена");
             return;
         }
 
-        // Меню
         while (true) {
-            System.out.println("\n📋 Меню:");
-            System.out.println("1. Показать список валют");
+            System.out.println("\nМеню:");
+            System.out.println("1. Показать валюты");
             System.out.println("2. Купить валюту");
-            System.out.println("3. Выйти");
-            System.out.print("Ваш выбор: ");
+            System.out.println("3. Выход");
+            System.out.print("Выберите действие: ");
+
             int choice = scanner.nextInt();
-            scanner.nextLine(); // очистка строки
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
                     currencyService.displayAllCurrencies();
                     break;
                 case 2:
-                    System.out.print("Введите валюту для покупки (например, Euro): ");
+                    System.out.print("Введите название валюты: ");
                     String currencyName = scanner.nextLine();
-                    System.out.print("Введите количество для покупки: ");
+                    System.out.print("Введите сумму: ");
                     double amount = scanner.nextDouble();
                     scanner.nextLine();
                     operationService.buyCurrency(currencyName, amount);
                     break;
                 case 3:
-                    System.out.println("👋 До свидания!");
+                    System.out.println("Выход из программы");
                     return;
                 default:
-                    System.out.println("❌ Неверный выбор. Попробуйте снова.");
+                    System.out.println("Некорректный выбор");
             }
         }
     }

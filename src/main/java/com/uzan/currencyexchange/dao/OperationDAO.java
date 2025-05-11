@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class OperationDAO {
-
     public void addOperation(Operation operation) {
         String sql = "INSERT INTO operations (currency_id, type, amount, date, profit) VALUES (?, ?, ?, NOW(), ?)";
         try (Connection conn = DatabaseManager.getConnection();

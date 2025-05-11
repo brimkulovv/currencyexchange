@@ -10,9 +10,9 @@ public class CurrencyService {
 
     public void displayAllCurrencies() {
         List<Currency> currencies = currencyDAO.getAllCurrencies();
-        System.out.println("📊 Список валют:");
+        System.out.println("Доступные валюты:");
         for (Currency c : currencies) {
-            System.out.printf("- %s | Доступна: %s | Кол-во: %.2f | Покупка: %.2f | Продажа: %.2f\n",
+            System.out.printf("%s | Доступна: %s | Кол-во: %.2f | Покупка: %.2f | Продажа: %.2f\n",
                     c.getName(), c.isAvailable(), c.getAmount(), c.getBuyRate(), c.getSellRate());
         }
     }
