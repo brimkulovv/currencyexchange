@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrencyDAO {
+
     public List<Currency> getAllCurrencies() {
         List<Currency> currencies = new ArrayList<>();
         String sql = "SELECT * FROM currencies";
@@ -39,6 +40,21 @@ public class CurrencyDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDouble(1, newAmount);
             stmt.setInt(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addCurrency(Currency currency) {
+        String sql = "INSERT INTO currencies (name, available, amount, buy_rate, sell_rate) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, currency.getName());
+            stmt.setBoolean(2, currency.isAvailable());
+            stmt.setDouble(3, currency.getAmount());
+            stmt.setDouble(4, currency.getBuyRate());
+            stmt.setDouble(5, currency.getSellRate());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

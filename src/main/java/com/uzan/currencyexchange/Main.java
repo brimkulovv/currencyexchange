@@ -21,8 +21,8 @@ public class Main {
         System.out.print("Введите пароль: ");
         String password = scanner.nextLine();
 
-        if (!authService.authenticate(username, password)) {
-            System.out.println("Завершение программы.");
+        if (authService.authenticate(username, password) == null) {
+            System.out.println("Ошибка аутентификации. Завершение программы.");
             return;
         }
 
@@ -31,17 +31,11 @@ public class Main {
             System.out.println("1. Показать список валют");
             System.out.println("2. Купить валюту");
             System.out.println("3. Продать валюту");
-            System.out.println("4. Показать историю операций");
+            System.out.println("4. Добавить валюту");
             System.out.println("5. Выйти");
             System.out.print("Ваш выбор: ");
-
-            int choice;
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Неверный ввод. Введите число.");
-                continue;
-            }
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -49,37 +43,36 @@ public class Main {
                     break;
                 case 2:
                     System.out.print("Введите валюту для покупки: ");
-                    String currencyToBuy = scanner.nextLine();
-                    System.out.print("Введите количество: ");
-                    double buyAmount = readDouble(scanner);
-                    operationService.buyCurrency(currencyToBuy, buyAmount);
+                    String currencyNameBuy = scanner.nextLine();
+                    System.out.print("Введите количество для покупки: ");
+                    double amountBuy = scanner.nextDouble();
+                    operationService.buyCurrency(currencyNameBuy, amountBuy);
                     break;
                 case 3:
                     System.out.print("Введите валюту для продажи: ");
-                    String currencyToSell = scanner.nextLine();
-                    System.out.print("Введите количество: ");
-                    double sellAmount = readDouble(scanner);
-                    operationService.sellCurrency(currencyToSell, sellAmount);
+                    String currencyNameSell = scanner.nextLine();
+                    System.out.print("Введите количество для продажи: ");
+                    double amountSell = scanner.nextDouble();
+                    operationService.sellCurrency(currencyNameSell, amountSell);
                     break;
                 case 4:
-                    operationService.displayOperations();
+                    System.out.print("Введите имя валюты: ");
+                    String currencyNameAdd = scanner.nextLine();
+                    System.out.print("Введите курс покупки: ");
+                    double buyRate = scanner.nextDouble();
+                    System.out.print("Введите курс продажи: ");
+                    double sellRate = scanner.nextDouble();
+                    System.out.print("Введите количество валюты: ");
+                    double amountAdd = scanner.nextDouble();
+                    currencyService.addCurrency(currencyNameAdd, buyRate, sellRate, amountAdd);
                     break;
                 case 5:
-                    System.out.println("До свидания");
+                    System.out.println("До свидания!");
                     return;
                 default:
                     System.out.println("Неверный выбор. Попробуйте снова.");
             }
         }
     }
-
-    private static double readDouble(Scanner scanner) {
-        while (true) {
-            try {
-                return Double.parseDouble(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.print("Неверный ввод. Введите число: ");
-            }
-        }
-    }
 }
+
